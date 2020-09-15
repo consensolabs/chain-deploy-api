@@ -1,4 +1,4 @@
-Falcon REST API with PostgreSQL
+SyndLend KYC REST API
 ===============================
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/consensolabs/loan-syndication-kyc)
 

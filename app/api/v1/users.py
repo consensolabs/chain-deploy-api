@@ -46,9 +46,7 @@ def validate_user_create(req, res, resource, params):
     schema = {
         "username": FIELDS["username"],
         "email": FIELDS["email"],
-        "password": FIELDS["password"],
-        "info": FIELDS["info"],
-        "shared_id": FIELDS["shared_id"],
+        "password": FIELDS["password"]
     }
 
     v = Validator(schema)
@@ -69,9 +67,7 @@ class Collection(BaseResource):
             user = User()
             user.username = user_req["username"]
             user.email = user_req["email"]
-            user.shared_id = user_req["shared_id"]
             user.password = hash_password(user_req["password"]).decode("utf-8")
-            user.info = user_req["info"] if "info" in user_req else None
             sid = uuid()
             user.sid = sid
             user.token = encrypt_token(sid).decode("utf-8")
@@ -231,7 +227,7 @@ class AllUserInformation(BaseResource):
 
             self.on_success(res, userinfo_db)
         except NoResultFound:
-            raise UserNotExistsError("user id: %s" % user_req["user_id"])
+            raise UserNotExistsError("user id: %s, shared id: %s" % (user_req.get("user_id"), user_req.get("shared_id")))
 
 
 

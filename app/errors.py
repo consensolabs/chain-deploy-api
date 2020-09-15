@@ -47,6 +47,12 @@ ERR_USER_NOT_EXISTS = {
     "title": "User Not Exists",
 }
 
+ERR_PROJECT_NOT_EXISTS = {
+    "status": falcon.HTTP_404,
+    "code": 21,
+    "title": "Project Not Exists",
+}
+
 ERR_USER_ROLE_NOT_EXISTS = {
     "status": falcon.HTTP_404,
     "code": 21,
@@ -119,6 +125,13 @@ class UserNotExistsError(AppError):
         super().__init__(ERR_USER_NOT_EXISTS)
         self.error["description"] = description
 
+
+class ProjectNotExistsError(AppError):
+    def __init__(self, description=None):
+        super().__init__(ERR_PROJECT_NOT_EXISTS)
+        self.error["description"] = description
+
+
 class UserRoleNotExistsError(AppError):
     def __init__(self, description=None):
         super().__init__(ERR_USER_ROLE_NOT_EXISTS)
@@ -135,6 +148,7 @@ class UnauthorizedError(AppError):
     def __init__(self, description=None):
         super().__init__(ERR_AUTH_REQUIRED)
         self.error["description"] = description
+
 
 class UnauthorizedUser(AppError):
     def __init__(self, description=None):
